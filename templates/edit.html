@@ -1,0 +1,70 @@
+$def with (translator, dest_language, compare_languages, all_languages, user)
+$if len( user.languages ) > 1:
+	<b>Translate: </b>
+	$for langcode in user.languages:
+		$if langcode == dest_language:
+			<a class="language-link-active" href="#">$translator.get_language_name(langcode)</a>  
+		$else:
+			<a class="language-link-inactive" href="$web.ctx.home/edit/$langcode/en/">$translator.get_language_name(langcode)</a> 
+	<br />
+<b>Compare to: </b>
+$for language in all_languages:
+	$ url = web.ctx.home + "/edit/" + dest_language + "/"
+	$if language[0] in compare_languages:
+		$for lng in compare_languages:
+			$if lng != language[0]:
+				$ url += lng + "/"
+		<a class="language-link-active" href="$url">$language[1]</a> 
+	$elif language[0] != dest_language:
+		$for lng in compare_languages:
+			$ url += lng + "/"
+		$ url += language[0] + "/"
+		<a class="language-link-inactive" href="$url">$language[1]</a> 
+	
+<br />
+<p style="text-size: smaller">(Warning: Changing languages discards all unsaved changes!)</p>
+<br />
+<p><b>Special character combinations.</b> When you translate these, always leave them as they are (in the correct place in the sentence):
+<ul>
+  <li><tt>%s:</tt> To be replaced by some text
+  <li><tt>%1$$s, %2$$s, %3$$s:</tt> Like <tt>%s</tt>, but used if there is more than text to be replaced, in order for one to distinguish between them.
+  <li><tt>%d:</tt> To be replaced by a number
+</ul></p>
+<form method="post"><input type="hidden" name="langcode" value="$dest_language" />
+<table>
+ <tr>
+  <td></td>
+$for langcode in compare_languages:
+    <td class="language-header">$translator.get_language_name(langcode)</td>
+  <td class="language-header">$translator.get_language_name(dest_language)</td>
+ </tr>
+ 
+$ i = 0;
+$for str in translator.get_all_strings():
+	$if i % 20 == 0:
+		<tr class="save-header">
+			<td colspan="7" class="save-header"><input type="submit" value="Save" /></td>
+		</tr>
+	$ i += 1
+
+	<tr>
+	<td class="string-internal-name">$str</td>
+	$for langcode in compare_languages:
+		$ langstr = translator.get_string( langcode, str )
+		<td class="default-string">$:langstr.replace( "\n", "<br />")</td>
+
+	$ defstr = translator.get_default_string( str )
+	$ langstr = translator.get_string( dest_language, str )
+	$if defstr.find( "\n" ) == -1:
+		<td class="translator-string"><input type="text" name="$str" value="$langstr" /></td>
+	$else:
+		<td class="translator-string"><textarea name="$str">$langstr</textarea></td>
+	</tr>
+ 
+$if i % 20 != 0:
+	<tr class="save-header">
+		<td colspan="7" class="save-header"><input type="submit" value="Save" /></td>
+	</tr>
+$ i += 1
+</table>
+</form>

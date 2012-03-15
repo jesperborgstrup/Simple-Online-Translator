@@ -1,0 +1,22 @@
+$def with (auth, page)
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Partia translation</title>
+<link rel="stylesheet" href="$web.ctx.home/static/style/main.css" />
+</head>
+
+<body>
+<div id="base-login-info">
+$if auth.logged_in():
+	Logged in as $auth.logged_in_user().name. <a href="$web.ctx.home/logout">Logout</a> - <a href="$web.ctx.home/edit">Edit</a>
+$else:
+	Not logged in
+</div>
+<div id="content">
+$:page
+</div>
+</body>
+</html>

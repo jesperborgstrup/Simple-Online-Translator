@@ -1,0 +1,59 @@
+body{
+	width: 100%;
+	margin: 0px;
+}
+
+div#base-login-info{
+	font-size: 1.5em;
+	padding-top:20px;
+	text-align:center;
+}
+
+div#content {
+	width: 100%;
+	padding: 10px;
+}
+
+a.language-link-inactive {
+	text-decoration: none;
+	color: #808080;
+}
+a.language-link-active {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+}
+
+tr.save-header {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+td.save-header {
+	background-color: #dddddd;
+	text-align: center;
+}
+
+td.language-header {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+td.string-internal-name {
+	font-family: monospace;
+	font-size: 0.8em;
+	
+}
+
+td.default-string {
+	width: 300px;
+}
+
+
+
+td.translator-string input {
+	width: 500px;
+}
+td.translator-string textarea {
+	width: 500px;
+	height: 250px;
+}

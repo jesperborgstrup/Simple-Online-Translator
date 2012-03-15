@@ -1,0 +1,9 @@
+.project
+.pydevproject
+*.pyc
+
+data
+!data/values/.empty
+
+sessions
+!sessions/.empty
