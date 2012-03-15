@@ -69,7 +69,6 @@ class Login:
     
     def POST(self):
         i = web.input( "username", "password" )
-        return self.GET( auth.session )
         if auth.authenticate( i.username, i.password ):
             return web.seeother( '/' )
         
