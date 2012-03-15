@@ -2,20 +2,21 @@ import web
 import os.path
 import auth
 from translator import Translator
+from main import template_dir, root_dir
 import settings
 
 
 template_globals = { 'web': web }
 
 def get_template( name, *args, **kwargs ):
-    return web.template.frender( os.path.join( settings.template_dir, '%s.html' % name ), globals=template_globals )( *args, **kwargs )
+    return web.template.frender( os.path.join( template_dir, '%s.html' % name ), globals=template_globals )( *args, **kwargs )
 
-_render = web.template.frender( os.path.join( settings.template_dir, 'base.html' ), globals=template_globals )
+_render = web.template.frender( os.path.join( template_dir, 'base.html' ), globals=template_globals )
 
 def render( *args, **kwargs ):
     return _render( auth, *args, **kwargs )
 
-trans = Translator( os.path.join( settings.root_dir, 'data' ), settings.all_languages )
+trans = Translator( os.path.join( root_dir, 'data' ), settings.all_languages )
 
 
 

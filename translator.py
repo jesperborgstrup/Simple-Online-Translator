@@ -59,6 +59,15 @@ class TranslatorLanguage:
         self.elements = {}
 #        print self.strings
         
+        if not os.path.exists( filename ):
+            if not os.path.exists( os.path.dirname( filename ) ):
+                os.mkdir( os.path.dirname( filename ) )
+                
+            f = codecs.open( filename, 'w', 'utf8' )
+            f.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n</resources>")
+            f.close()
+            
+            
         f = codecs.open( filename, 'r', 'utf8' )
         data = f.read()
         f.close()
@@ -122,7 +131,7 @@ class TranslatorLanguage:
         
         
 if __name__ == '__main__':
-    from main import all_languages
+    from settings import all_languages
     trans = Translator( "data", all_languages )
     for lang in trans.languages.values():
         print "Count (%s): %d" % ( lang[0], lang[1].count_words() ) 
