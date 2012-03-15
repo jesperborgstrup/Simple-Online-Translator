@@ -1,14 +1,14 @@
 import web
 import sys
 import os.path
-import settings
-
 """
 We need to insert the path into the syspath here,
 because it isn't added automatically when running through mod_wsgi.
-If it wasn't here, import translate and import root below would fail
+If it wasn't here, local imports would fail
 """
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+import settings
+
 
 urls = (
       '/?', 'handler.Root',
