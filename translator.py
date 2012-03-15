@@ -92,7 +92,7 @@ class TranslatorLanguage:
                 
                 
     def read_in_string(self, string):
-        return string.replace( r"\n", "\n" ).replace( r"\'" , "'" )
+        return string.replace( r"\\n", "\n" ).replace( r"\'" , "'" )
     
     def set_string(self, name, value):
         self.strings[ name ] = value
@@ -120,7 +120,7 @@ class TranslatorLanguage:
         f.close();
 
     def write_out_string(self, string):
-        return string.replace( "'", r"\'" ).replace( "\n", r"\n" )
+        return string.replace( "'", r"\'" ).replace( "\n", "\\n" )
     
     def count_words(self):
         count = 0
