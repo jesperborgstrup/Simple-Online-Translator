@@ -92,7 +92,7 @@ class TranslatorLanguage:
                 
                 
     def read_in_string(self, string):
-        return string.replace( r"\\n", "\n" ).replace( r"\'" , "'" )
+        return string.replace( "\\n", "\n" ).replace( r"\'" , "'" )
     
     def set_string(self, name, value):
         self.strings[ name ] = value
